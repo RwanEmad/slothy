@@ -247,6 +247,7 @@ outLinedFormField({
   required TextEditingController controller, //*
   TextInputType keyboardType = TextInputType.text, //*
   bool ispassowrd = false,
+  bool? readOnly=false,
   bool keyboardMultilines = false,
   int maxLines = 1,
   String? lable, //*
@@ -263,6 +264,7 @@ outLinedFormField({
   Function? prefixPressed,
   var textAlignVertical = TextAlignVertical.center,
   var inputTextColor = Colors.white,
+  var suffixIconColor=Colors.white60,
   double inputTextSize = 22,
   bool filled=false,
    fillColor=Colors.white,
@@ -280,7 +282,7 @@ outLinedFormField({
     Container(
       height: feildHeight,
       child: TextFormField(
-
+         readOnly: readOnly!,
         style: TextStyle(
           fontSize: inputTextSize,
           color: inputTextColor,
@@ -333,6 +335,7 @@ outLinedFormField({
           suffixIcon: suffix != null
               ? IconButton(
                   icon: Icon(suffix),
+                  color: suffixIconColor,
                   onPressed: () {
                     suffixPressed!(() {
                       enabledBorder = false;

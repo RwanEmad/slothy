@@ -25,8 +25,8 @@ class MyApp extends StatelessWidget {
       home: AnimatedSplashScreen(
           duration: 3000,
           splash: splashScreen(),
-        //  nextScreen: Home_layout(),
-            nextScreen: endTimeCalenderScreen(title: 'EndTime',),
+          nextScreen: Home_layout(),
+        //     nextScreen: endTimeCalenderScreen(title: 'EndTime',),
           splashTransition: SplashTransition.rotationTransition,
           backgroundColor: Colors.cyan,
       )//Home_layout(),

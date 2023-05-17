@@ -1,9 +1,20 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import '../../models/models.dart';
 import '../../shared/components/component.dart';
 import '../../shared/style/styles.dart';
+
+
+import 'package:intl/date_symbol_data_local.dart';
+
+// import 'pages/basics_example.dart';
+// import 'pages/complex_example.dart';
+// import 'pages/events_example.dart';
+// import 'pages/multi_example.dart';
+// import 'pages/range_example.dart';
 
 class dailyTaskScreen extends StatefulWidget {
   const dailyTaskScreen({Key? key}) : super(key: key);
@@ -30,10 +41,10 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
     'every week',
     'every month',
   ];
-  List<String> periodItem = [
+  List<String> endTime = [
 
-    'week',
-    'month',
+    ' ',
+
   ];
   List<String> timeItem = [
     'Morning',
@@ -53,10 +64,10 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
      Color.fromARGB(255, 29, 185, 255),
      Color.fromARGB(255, 102, 122, 202),
      Color.fromARGB(255, 255, 184, 237),
-     Color.fromARGB(255, 202, 193, 152),
+     // Color.fromARGB(255, 202, 193, 152),
   ];
   List<Color> supColorsList=[
-     Color.fromARGB(0, 98, 98, 98),
+     Color.fromARGB(31, 98, 98, 98),
      Color.fromARGB(255, 238, 191, 228),
      Color.fromARGB(255, 184, 152, 129),
      Color.fromARGB(255, 247, 81, 88),
@@ -76,6 +87,24 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
   String titleLable = "Title";
   bool floatingLable = true;
   bool enabledBorder = true;
+
+   DateTime toDay=DateTime.now();
+   DateTime selectedDay= DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day+7);
+   CalendarFormat calendarFormat=CalendarFormat.month;
+   DateFormat dateFormat=DateFormat(" MM _EEEE dd");
+
+   bool showTableCalender=false;
+   void onDaySelected(DateTime day, DateTime focusedDay){
+     setState(() {
+       selectedDay=day;
+     });
+   }
+  // (Day, focusedDay) {
+  // setState(() {
+  // selectedDay = Day;
+  // focusedDay = focusedDay; // update `_focusedDay` here as well
+  // });
+  // },
   @override
   Widget build(BuildContext context) {
 
@@ -145,7 +174,7 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
                       });
                     },
                     enabledBorder: false,
-                  )),//title_feild
+                  )),///////title_feild
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 20.0, vertical: 10),
@@ -178,7 +207,7 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
 
                   ),
                 ),
-              ),//description_feild
+              ),///////description_feild
 
               Padding(
                 padding: const EdgeInsets.only(top:8.0,left:10),
@@ -187,7 +216,7 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
                     fontSize: 22,
                     fontWeight: FontWeight.w300,
                     fontStyle: FontStyle.italic),),
-              ),//repeate
+              ),///////repeate
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                 child: Container(
@@ -274,7 +303,7 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
                     ),
                   ),
                 ),
-              ),//repeate_Dropdown
+              ),///////repeate_Dropdown
 
               Padding(
                 padding: const EdgeInsets.only(top:8.0,left:10),
@@ -283,18 +312,21 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
                     fontSize: 22,
                     fontWeight: FontWeight.w300,
                     fontStyle: FontStyle.italic),),
-              ), //period
+              ), ///////endDate
               Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 20.0, vertical: 10),
-                  child: outLinedFormField(filled: true,fillColor:Color.fromARGB(181, 92, 142, 171),
-                    enableLable: false,
+                  child: outLinedFormField(
+                    readOnly:true,
+                    filled: true,
+                    fillColor:periodColor,
                     inputTextColor: Colors.white60,
                     inputTextSize: 18,
-                    controller: endDateController,
+                    controller: TextEditingController(text: "${dateFormat.format(selectedDay)}"),
                     floatingLable: false,
                     onSubmit: () {
                       setState(() {
+
                       });
                     },
                     onTap: () {
@@ -302,8 +334,395 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
 
                       });
                     },
-                  )),
+                    suffix: Icons.calendar_month_rounded,
+                    suffixPressed: (){
 
+                    }
+
+                  )),////////endDate
+
+              Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Container(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              decoration: BoxDecoration(
+                // color: Color.fromARGB(135, 86, 185, 175),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TableCalendar(
+                rangeEndDay: selectedDay,
+                calendarBuilders: CalendarBuilders(
+                  dowBuilder: (context, day) {
+                    if (day.weekday == DateTime.friday) {
+                      final text = DateFormat.E().format(day);
+                      return Center(
+                        child: Text(
+                          text,
+                          style: TextStyle(
+                            color: Colors.white38,
+                        ),
+                      ));
+                    }
+                    if (day.weekday == selectedDay.weekday) {
+                      final text = DateFormat.E().format(day);
+                      return Center(
+                        child: Text(
+                          text,
+                          style: TextStyle(
+                            fontSize:22,color: Colors.white,),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                calendarFormat: calendarFormat,
+                onFormatChanged: (format) {
+                  setState(() {
+                    calendarFormat = format;
+                  });
+                },
+                calendarStyle: CalendarStyle(
+                  disabledTextStyle:TextStyle(
+                    fontSize: 18,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.black45,
+                  ) ,
+                  disabledDecoration: BoxDecoration(
+                    color: Color.fromARGB(27, 164, 164, 164),
+                    shape:BoxShape.circle,
+                  ),
+
+                  defaultTextStyle: TextStyle(
+                    fontSize: 18,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.white60,
+                  ),
+                  defaultDecoration: BoxDecoration(
+                    shape:BoxShape.circle,
+                    color:Color.fromARGB(27, 164, 164, 164),
+                  ),
+
+                  outsideTextStyle:TextStyle(
+                    fontSize: 18,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.white24,
+                  ) ,
+                  outsideDecoration: BoxDecoration(
+                    shape:BoxShape.circle,
+                    color:Color.fromARGB(27, 164, 164, 164),
+                  ),
+
+                  weekendTextStyle: TextStyle(
+                    fontSize: 18,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.white60,
+                  ),
+                  weekendDecoration: BoxDecoration(
+                    shape:BoxShape.circle,
+                    color:Color.fromARGB(27, 164, 164, 164),
+                  ),
+
+                  holidayTextStyle: TextStyle(
+                    fontSize: 16,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.white38,
+                  ),
+                  todayDecoration: BoxDecoration(color: Colors.white38,shape:BoxShape.circle,
+                  ),
+                  selectedTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w300,
+                  fontStyle: FontStyle.italic,
+                  ),
+                  // outsideDaysVisible: true,
+                  // outsideDecoration: BoxDecoration(
+                  //   color: Colors.blue
+                  // ),
+                 selectedDecoration: BoxDecoration(
+                   shape:BoxShape.circle,
+                   color:Color.fromARGB(181, 92, 142, 171),
+                ),
+
+                ),
+                      locale: "en_US",
+                      rowHeight:50,
+                      headerStyle: HeaderStyle(
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(181, 92, 142, 171),
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight:  Radius.circular(10))
+                        ),
+                        titleTextStyle:TextStyle(
+                          color: Colors.white60,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.italic,
+                        ),
+                        formatButtonVisible: false,
+                        titleCentered: true,
+                        leftChevronIcon: Icon(
+                          Icons.chevron_left,
+                          color: Colors.white60,
+                          size: 26,
+                        ),
+                        rightChevronIcon: Icon(
+                          Icons.chevron_right,
+                          color: Colors.white60,
+                          size: 26,
+                        ),
+                      ),
+                      availableGestures: AvailableGestures.all,
+                      selectedDayPredicate: (day)=> isSameDay(selectedDay,day),
+                      focusedDay: selectedDay,
+                      firstDay: toDay,
+                      lastDay: DateTime.utc(2030, 3, 14),
+                      onDaySelected: onDaySelected,
+                      holidayPredicate: (day) {
+                                    // Weekends
+                               return day.weekday ==DateTime.friday;
+                               },
+                      startingDayOfWeek: StartingDayOfWeek.sunday,
+                      daysOfWeekHeight: 40.0,
+                      daysOfWeekStyle: DaysOfWeekStyle(
+                        weekdayStyle: TextStyle(
+                          color: Colors.white60,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.italic,
+                        ),
+                        weekendStyle: TextStyle(
+                          color: Colors.white60,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      )
+
+              ),
+            ),
+          ),/////endDateCalender
+
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+              //   child: Container(
+              //     height: 60,
+              //     width: double.infinity,
+              //     child: DropdownButtonHideUnderline(
+              //       child: DropdownButton2(
+              //         isExpanded: true,
+              //         hint:  Row(
+              //           children: [
+              //             Expanded(
+              //               child: Text(
+              //                 " ",
+              //                 style: TextStyle(
+              //                   fontSize: 14,
+              //                   fontWeight: FontWeight.bold,
+              //                   color: Colors.white60,
+              //                   fontStyle: FontStyle.italic,
+              //                 ),
+              //                 overflow: TextOverflow.ellipsis,
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //         items:endTime.map((item) => DropdownMenuItem<String>(
+              //           value: item,
+              //           child: TableCalendar(
+              //               rangeEndDay: selectedDay,
+              //               calendarBuilders: CalendarBuilders(
+              //                 dowBuilder: (context, day) {
+              //                   if (day.weekday == DateTime.friday) {
+              //                     final text = DateFormat.E().format(day);
+              //                     return Center(
+              //                         child: Text(
+              //                           text,
+              //                           style: TextStyle(
+              //                             color: Colors.white38,
+              //                           ),
+              //                         ));
+              //                   }
+              //                   if (day.weekday == selectedDay.weekday) {
+              //                     final text = DateFormat.E().format(day);
+              //                     return Center(
+              //                       child: Text(
+              //                         text,
+              //                         style: TextStyle(
+              //                           fontSize:22,color: Colors.white,),
+              //                       ),
+              //                     );
+              //                   }
+              //                 },
+              //               ),
+              //               calendarFormat: calendarFormat,
+              //               onFormatChanged: (format) {
+              //                 setState(() {
+              //                   calendarFormat = format;
+              //                 });
+              //               },
+              //               calendarStyle: CalendarStyle(
+              //                 disabledTextStyle:TextStyle(
+              //                   fontSize: 18,
+              //                   fontStyle: FontStyle.italic,
+              //                   color: Colors.black45,
+              //                 ) ,
+              //                 disabledDecoration: BoxDecoration(
+              //                   color: Color.fromARGB(27, 164, 164, 164),
+              //                   shape:BoxShape.circle,
+              //                 ),
+              //
+              //                 defaultTextStyle: TextStyle(
+              //                   fontSize: 18,
+              //                   fontStyle: FontStyle.italic,
+              //                   color: Colors.white60,
+              //                 ),
+              //                 defaultDecoration: BoxDecoration(
+              //                   shape:BoxShape.circle,
+              //                   color:Color.fromARGB(27, 164, 164, 164),
+              //                 ),
+              //
+              //                 outsideTextStyle:TextStyle(
+              //                   fontSize: 18,
+              //                   fontStyle: FontStyle.italic,
+              //                   color: Colors.white24,
+              //                 ) ,
+              //                 outsideDecoration: BoxDecoration(
+              //                   shape:BoxShape.circle,
+              //                   color:Color.fromARGB(27, 164, 164, 164),
+              //                 ),
+              //
+              //                 weekendTextStyle: TextStyle(
+              //                   fontSize: 18,
+              //                   fontStyle: FontStyle.italic,
+              //                   color: Colors.white60,
+              //                 ),
+              //                 weekendDecoration: BoxDecoration(
+              //                   shape:BoxShape.circle,
+              //                   color:Color.fromARGB(27, 164, 164, 164),
+              //                 ),
+              //
+              //                 holidayTextStyle: TextStyle(
+              //                   fontSize: 16,
+              //                   fontStyle: FontStyle.italic,
+              //                   color: Colors.white38,
+              //                 ),
+              //                 todayDecoration: BoxDecoration(color: Colors.white38,shape:BoxShape.circle,
+              //                 ),
+              //                 selectedTextStyle: TextStyle(
+              //                   color: Colors.white,
+              //                   fontSize: 20,
+              //                   fontWeight: FontWeight.w300,
+              //                   fontStyle: FontStyle.italic,
+              //                 ),
+              //                 // outsideDaysVisible: true,
+              //                 // outsideDecoration: BoxDecoration(
+              //                 //   color: Colors.blue
+              //                 // ),
+              //                 selectedDecoration: BoxDecoration(
+              //                   shape:BoxShape.circle,
+              //                   color:Color.fromARGB(181, 92, 142, 171),
+              //                 ),
+              //
+              //               ),
+              //               locale: "en_US",
+              //               rowHeight:50,
+              //               headerStyle: HeaderStyle(
+              //                 decoration: BoxDecoration(
+              //                     color: Color.fromARGB(181, 92, 142, 171),
+              //                     borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight:  Radius.circular(10))
+              //                 ),
+              //                 titleTextStyle:TextStyle(
+              //                   color: Colors.white60,
+              //                   fontSize: 18,
+              //                   fontWeight: FontWeight.w500,
+              //                   fontStyle: FontStyle.italic,
+              //                 ),
+              //                 formatButtonVisible: false,
+              //                 titleCentered: true,
+              //                 leftChevronIcon: Icon(
+              //                   Icons.chevron_left,
+              //                   color: Colors.white60,
+              //                   size: 26,
+              //                 ),
+              //                 rightChevronIcon: Icon(
+              //                   Icons.chevron_right,
+              //                   color: Colors.white60,
+              //                   size: 26,
+              //                 ),
+              //               ),
+              //               availableGestures: AvailableGestures.all,
+              //               selectedDayPredicate: (day)=> isSameDay(selectedDay,day),
+              //               focusedDay: selectedDay,
+              //               firstDay: toDay,
+              //               lastDay: DateTime.utc(2030, 3, 14),
+              //               onDaySelected: onDaySelected,
+              //               holidayPredicate: (day) {
+              //                 // Weekends
+              //                 return day.weekday ==DateTime.friday;
+              //               },
+              //               startingDayOfWeek: StartingDayOfWeek.sunday,
+              //               daysOfWeekHeight: 40.0,
+              //               daysOfWeekStyle: DaysOfWeekStyle(
+              //                 weekdayStyle: TextStyle(
+              //                   color: Colors.white60,
+              //                   fontSize: 18,
+              //                   fontWeight: FontWeight.w500,
+              //                   fontStyle: FontStyle.italic,
+              //                 ),
+              //                 weekendStyle: TextStyle(
+              //                   color: Colors.white60,
+              //                   fontSize: 18,
+              //                   fontWeight: FontWeight.w500,
+              //                   fontStyle: FontStyle.italic,
+              //                 ),
+              //               )
+              //
+              //           ),
+              //         ))
+              //             .toList(),
+              //         value: timeSelectedValue,
+              //         onChanged: (value) {
+              //           setState(() {
+              //             timeSelectedValue = value as String;
+              //           });
+              //         },
+              //         buttonStyleData: ButtonStyleData(
+              //           padding: const EdgeInsets.only(left: 14, right: 14),
+              //           decoration: BoxDecoration(
+              //             borderRadius: BorderRadius.circular(10),
+              //             border: Border.all(
+              //               color: Colors.black26,
+              //             ),
+              //             color: Color.fromARGB(181, 92, 142, 171),
+              //           ),
+              //           elevation: 2,
+              //         ),
+              //         iconStyleData: const IconStyleData(
+              //           icon: Icon(
+              //             Icons.arrow_drop_down_outlined,
+              //             size: 30,
+              //           ),
+              //           iconEnabledColor: Colors.white60,
+              //           // iconDisabledColor: Colors.grey,
+              //         ),
+              //
+              //         dropdownStyleData: DropdownStyleData(
+              //           width: 350,
+              //           decoration: BoxDecoration(
+              //             borderRadius: BorderRadius.circular(14),
+              //             color: Colors.white54,
+              //           ),
+              //
+              //         ),
+              //         menuItemStyleData: const MenuItemStyleData(
+              //           height: 400,
+              //           padding: EdgeInsets.only(left: 14, right: 14),
+              //           //item padding
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),/////////period_Dropdown
 
               // Padding(
               //   padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
@@ -400,7 +819,7 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
                     fontSize: 22,
                     fontWeight: FontWeight.w300,
                     fontStyle: FontStyle.italic),),
-              ),
+              ),///////colorsSwitch
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Container(
@@ -454,7 +873,7 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
                     },
                   ),
                 ),
-              ),
+              ),///////colorsSwitch
 
               Padding(
                 padding: const EdgeInsets.only(top:8.0,left:10),
@@ -463,7 +882,7 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
                     fontSize: 22,
                     fontWeight: FontWeight.w300,
                     fontStyle: FontStyle.italic),),
-              ),//when
+              ),/////////when
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
                 child: Container(
@@ -549,7 +968,7 @@ class _dailyTaskScreenState extends State<dailyTaskScreen> {
                     ),
                   ),
                 ),
-              ),//period_Dropdown
+              ),/////////period_Dropdown
 
 
             ],
