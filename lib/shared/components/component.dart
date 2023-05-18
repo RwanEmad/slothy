@@ -170,6 +170,7 @@ textFormField({
   double hintLableSize = 22,
   bool floatingLable = true,
   var floatingLableColor=Colors.white54,
+  var fontWeight=FontWeight.w500,
   //*
 }) =>
     Container(
@@ -178,7 +179,7 @@ textFormField({
         style: TextStyle(
           fontSize: inputTextSize,
           color: inputTextColor,
-          fontWeight: FontWeight.w500,
+          fontWeight: fontWeight,
           fontStyle: italic,
         ),
         cursorHeight: 25,
@@ -208,7 +209,7 @@ textFormField({
           labelText: enableLable ? lable : null,
           labelStyle: TextStyle(
               fontSize: lableSize,
-              fontWeight: FontWeight.w500,
+              fontWeight: fontWeight,
               color: lableColor,
               fontStyle: italic,
               ),
@@ -337,9 +338,7 @@ outLinedFormField({
                   icon: Icon(suffix),
                   color: suffixIconColor,
                   onPressed: () {
-                    suffixPressed!(() {
-                      enabledBorder = false;
-                    });
+                    suffixPressed!();
                   },
                 )
               : null,
@@ -493,16 +492,16 @@ defaltDropdownButton({
 dailyHomeCard({
   var color = Colors.white10,
   required String title,
-  required String text,
-  required Function? onLongPress,
+   String? text,
+  Function? ontap,
   String? backGround =
       "assets/images/70e2f9d4191154624f58c15eb684e27a.jpg", //assets/images/70e2f9d4191154624f58c15eb684e27a.jpg
   var backGroundColor = const Color.fromARGB(0, 55, 6, 23),
   var ContentList,
 }) =>
     GestureDetector(
-      onLongPress: () {
-        onLongPress!();
+      onTap: () {
+        ontap!();
       },
       child: Padding(
         padding: const EdgeInsets.all(5.0),
@@ -532,43 +531,17 @@ dailyHomeCard({
                         height: 180,
                         width: 180,
                       )),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          title!,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: ContentList.length,
-                              scrollDirection: Axis.vertical,
-                              primary: false,
-                              //solution of slow scroll//////
-                              physics: BouncingScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return Text(
-                                  ContentList[index],
-                                  style: TextStyle(
-                                      color: Colors.white60,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w300),
-                                );
-                              }),
-                        ),
-                        //SizedBox(width:5,),
-                      ],
+                  Center(
+                    child: Text(
+                      title!,
+                      style: TextStyle(
+
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ]))),
@@ -772,7 +745,7 @@ dailyRoutinCard({
   required Function? onCheckBoxChange,
   required Function? onTap,
   String? Title,
-  required List taskTitle,
+   List? taskTitle,
   List? taskStart,
   List? taskFinish,
 }) {
@@ -805,7 +778,7 @@ dailyRoutinCard({
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Morning routin",
+                        Title!,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 24,
@@ -849,6 +822,7 @@ const leftTimeColor = Color.fromARGB(124, 255, 0, 0);
 
 taskCard({
   required String? taskTitle,
+    Key? key,
   String? repeat = "Repeat",
   var taskTitleColor = Colors.black,
   var textColor = Colors.black,
@@ -856,10 +830,12 @@ taskCard({
   String? taskIconPath='assets/icons/love-letter.png',
   required Function? onTap,
   Function? editOnPressed,
+  Function? deleteOnPressed,
   Function? onChangedCheckBox,
   required bool? checkBoxValue,
 }) =>
     GestureDetector(
+      key: key,
       onTap: () {
         onTap!();
       },
@@ -884,7 +860,8 @@ taskCard({
                       checkBoxValue = newValue!;
                     }),
               ),
-              Stack(children: [
+              Stack(
+                  children: [
                 Container(
                   alignment: Alignment.topLeft,
                   height: 110,
@@ -921,6 +898,7 @@ taskCard({
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
+
                         Expanded(
                           flex: 1,
                           child: Container(
@@ -928,7 +906,8 @@ taskCard({
                             width: 35,
                             child: FloatingActionButton(
                               elevation: 0,
-                              backgroundColor: Color.fromARGB(114, 91, 90, 90),
+                              backgroundColor: Color.fromARGB(
+                                  114, 135, 135, 135),
                               onPressed: () {
                                 editOnPressed!();
                               },
@@ -936,6 +915,29 @@ taskCard({
                                 Icons.edit_rounded,
                                 color: Colors.white,
                                 size: 20,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            height: 35,
+                            width: 35,
+                            child: FloatingActionButton(
+                              elevation: 0,
+                              backgroundColor: Color.fromARGB(
+                                  114, 135, 135, 135),
+                              onPressed: () {
+                                deleteOnPressed!();
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 15.0),
+                                child: Icon(
+                                  Icons.minimize_rounded,
+                                  color: Colors.white,
+                                  size: 25,
+                                ),
                               ),
                             ),
                           ),
@@ -998,7 +1000,8 @@ taskCard({
                     ),
                   ]),
                 ),
-              ]),
+              ]
+              ),
             ],
           ),
         ),

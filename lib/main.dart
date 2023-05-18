@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:slothy/modules/homeScreen.dart';
 import 'layout/Home_layout.dart';
-import 'modules/dailyRoutine/endTimeCalenderScreen.dart';
+import 'modules/dailyRoutine/endTimeTableCalenderScreen.dart';
 import 'modules/splashScreen.dart';
 import 'modules/welcomeScreen.dart';
 

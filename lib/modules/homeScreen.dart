@@ -3,6 +3,7 @@ import 'package:slothy/modules/dailyRoutine/dailyRoutinScreen.dart';
 import 'package:slothy/modules/welcomeScreen.dart';
 import '../models/models.dart';
 import '../shared/components/component.dart';
+import 'dailyRoutine/newRoutineScreen.dart';
 
 class homeScreen extends StatefulWidget {
   const homeScreen({Key? key}) : super(key: key);
@@ -134,13 +135,11 @@ class _homeScreenState extends State<homeScreen> {
               //solution of slow scroll//////
               itemBuilder: (context, index) {
                 return dailyHomeCard(
-                  ContentList: dailyTaskList,
                   title: dailyTitleList[index],
-                  text: dailyTaskList[index],
-                  onLongPress: () {
+                  ontap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                      return ScreenList[index];
+                      return newRoutineScreen();
                     }));
                   },
                 );
