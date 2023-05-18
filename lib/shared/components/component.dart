@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 import 'package:slothy/modules/dailyRoutine/dailyRoutinScreen.dart';
 import '../../models/models.dart';
 import '../style/colors.dart';
@@ -353,150 +354,14 @@ outLinedFormField({
       ),
     );
 
-defaltDropdownButton({
-  required List<String> items,
-  required String dropdownvalue,
-  required Function? onChange(String value),
-}) =>
-    DropdownButtonHideUnderline(
-      child: DropdownButton2(
-        isExpanded: true,
-        items: items
-            .map((item) => DropdownMenuItem<String>(
-                  value: item,
-                  child: Text(
-                    item,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontStyle: italic,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ))
-            .toList(),
-        value: dropdownvalue,
-        onChanged: (s) {
-//  onChange!();
-        },
-        buttonStyleData: ButtonStyleData(
-          height: 50,
-          width: 200,
-          padding: const EdgeInsets.only(left: 14, right: 14),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(
-              color: Colors.black26,
-            ),
-            color: Colors.white,
-          ),
-          elevation: 2,
-        ),
-        dropdownStyleData: DropdownStyleData(
-          maxHeight: 200,
-          width: 200,
-          padding: null,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            color: Colors.white,
-          ),
-          elevation: 8,
-          scrollbarTheme: ScrollbarThemeData(
-            radius: const Radius.circular(40),
-            thickness: MaterialStateProperty.all<double>(6),
-            thumbVisibility: MaterialStateProperty.all<bool>(true),
-          ),
-        ),
-      ),
-    );
-
-// goalsCard({
-//   var color,
-//   required String title,
-//   String? period,
-//   String? finished,
-//   required String content,
-//   required String text,
-//   required Function? onLongPress,
-//   var ContentList,
-// }) =>
-//     GestureDetector(
-//       onLongPress: () {
-//         onLongPress!();
-//       },
-//       child: Container(
-//           height: 180,
-//           width: double.infinity,
-//           clipBehavior: Clip.antiAliasWithSaveLayer,
-//           decoration: BoxDecoration(
-//             //color: Colors.blue,
-//             borderRadius: BorderRadius.circular(20),
-//           ),
-//           child: Card(
-//               elevation: 20,
-//               shape: RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.all(
-//                 Radius.circular(20),
-//               )),
-//               color: color,
-//               child: Padding(
-//                 padding: const EdgeInsets.all(20.0),
-//                 child: Row(
-//                   children: [
-//                     Expanded(
-//                       flex: 3,
-//                       child: Column(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           Text(
-//                             title!,
-//                             style: TextStyle(
-//                                 color: Colors.white,
-//                                 fontSize: 26,
-//                                 fontWeight: FontWeight.w800),
-//                           ),
-//                           SizedBox(
-//                             height: 10,
-//                           ),
-//                           Expanded(
-//                             child: ListView.builder(
-//                                 shrinkWrap: true,
-//                                 itemCount: ContentList.length,
-//                                 scrollDirection: Axis.vertical,
-//                                 primary: false,
-//                                 //solution of slow scroll//////
-//                                 itemBuilder: (context, index) {
-//                                   return Text(
-//                                     ContentList[index],
-//                                     style: TextStyle(
-//                                         color: Colors.black38,
-//                                         fontSize: 18,
-//                                         fontWeight: FontWeight.w300),
-//                                   );
-//                                 }),
-//                           ),
-//                         ],
-//                       ),
-//                     ),
-//                     //SizedBox(width:5,),
-//                     Expanded(
-//                         flex: 1,
-//                         child: Image.asset("assets/images/alarm-clock.png",
-//                             width: 80, height: 80)),
-//                   ],
-//                 ),
-//               ))),
-//     );
 
 dailyHomeCard({
   var color = Colors.white10,
   required String title,
    String? text,
   Function? ontap,
-  String? backGround =
-      "assets/images/70e2f9d4191154624f58c15eb684e27a.jpg", //assets/images/70e2f9d4191154624f58c15eb684e27a.jpg
-  var backGroundColor = const Color.fromARGB(0, 55, 6, 23),
+  String? backGround , //assets/images/70e2f9d4191154624f58c15eb684e27a.jpg
+  var backGroundColor ,
   var ContentList,
 }) =>
     GestureDetector(
@@ -506,45 +371,40 @@ dailyHomeCard({
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: Container(
-            height: 180,
             width: 180,
             clipBehavior: Clip.antiAliasWithSaveLayer,
             decoration: BoxDecoration(
               color: backGroundColor,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                  Radius.circular(20),
-                )),
-                color: color,
-                child: Stack(children: [
-                  Container(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Image.asset(
-                        backGround!,
-                        fit: BoxFit.cover,
-                        height: 180,
-                        width: 180,
-                      )),
-                  Center(
-                    child: Text(
-                      title!,
-                      style: TextStyle(
+            child: Stack(children: [
+              Container(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  decoration: BoxDecoration(
 
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                    ),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                ]))),
+                  child: backGround!=null?Image.asset(
+                    backGround!,
+                    fit: BoxFit.cover,
+                    height: 180,
+                    width: 180,
+                  ):null,
+              ),
+              Center(
+                child: Text(
+                  title!,
+                  style: TextStyle(
+
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ])),
       ),
     );
 
@@ -562,128 +422,124 @@ goalsCard({
         onLongPress!();
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 35.0),
+        padding: const EdgeInsets.only(right: 20.0),
         child: Container(
-          width: double.infinity,
+          width: 330,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40),
-          ),
-          child: Card(
             color: Colors.white38,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-              Radius.circular(40),
-            )),
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          taskTitle,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Expanded(
-                        child: Text(
-                          rule!,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ), //title & rule
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 40,
-                      ),
-                      Text(
-                        "Crumbs : ",
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 15.0,right: 15, bottom: 10,top: 10),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        taskTitle,
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 18,
                             fontWeight: FontWeight.w600),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                    ],
-                  ), //crumbs Word
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 150,
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: crumbsList!.length,
-                        scrollDirection: Axis.vertical,
-                        primary: false,
-                        //solution of slow scroll//////
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return crumbsCard(
-                              crumbTitle: crumbTitlesList![index]);
-                        }),
-                  ), //crumbsListView
-                  //Crumbs card
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Text(
-                          "2/10/2022",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
-                        ),
+                    ),
+                    SizedBox(width: 40,),
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        rule!,
+                        style: TextStyle(
+                            color: Colors.white60,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      SizedBox(
-                        width: 40,
+                    ),
+                  ],
+                ), //title & rule
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 40,
+                    ),
+                    Text(
+                      "Crumbs : ",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ), //crumbs Word
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 90,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: crumbsList!.length,
+                      scrollDirection: Axis.vertical,
+                      primary: false,
+                      //solution of slow scroll//////
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return crumbsCard(
+                            crumbTitle: crumbTitlesList![index]);
+                      }),
+                ), //crumbsListView
+                //Crumbs card
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        "2/10/2022",
+                        style: TextStyle(
+                            color: Colors.white60,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
                       ),
-                      Expanded(
-                        flex: 2,
-                        child: Text(
-                          "Deadline : " + "13/6/2023",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
+                    ),
+                    SizedBox(
+                      width: 80,
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Text(
+                        "Deadline : " + "13/6/2023",
+                        style: TextStyle(
+                            color: Colors.white60,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ],
-                  ), //Start &deadline
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ), //Start &deadline
+               // // SizedBox(
+               //    height: 20,
+               //  ),
+              ],
             ),
           ),
         ),
@@ -698,41 +554,41 @@ crumbsCard({
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
       child: Center(
         child: Container(
-          height: 60,
+          height: 35,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(50),
+            color: Color.fromARGB(219, 221, 184, 146),
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(
-                width: 25,
-              ),
               Expanded(
                 flex: 2,
-                child: Text(
-                  crumbTitle,
-                  style: TextStyle(
-                      color: Colors.deepPurpleAccent,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    crumbTitle,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
-              SizedBox(
-                width: 20,
-              ),
-              IconButton(
-                  onPressed: () {
-                    onPressed!();
-                  },
-                  icon: Icon(
-                    Icons.more_vert_rounded,
-                    size: 40,
-                  ))
+              // SizedBox(
+              //   width: 20,
+              // ),
+              // IconButton(
+              //     onPressed: () {
+              //       onPressed!();
+              //     },
+              //     icon: Icon(
+              //       Icons.more_vert_rounded,
+              //       size: 25,
+              //     ))
               // Icon(Icons.more_vert_rounded,size: 40,),
             ],
           ),
@@ -826,7 +682,7 @@ taskCard({
   String? repeat = "Repeat",
   var taskTitleColor = Colors.black,
   var textColor = Colors.black,
-
+  var checkBoxBorderColor=Colors.black,
   String? taskIconPath='assets/icons/love-letter.png',
   required Function? onTap,
   Function? editOnPressed,
@@ -852,7 +708,7 @@ taskCard({
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
                     side: MaterialStateBorderSide.resolveWith(
-                        (states) => BorderSide(color: Colors.black, width: 1)),
+                        (states) => BorderSide(color: checkBoxBorderColor, width: 1)),
                     checkColor: Colors.white,
                     value: checkBoxValue,
                     activeColor: Colors.green,
@@ -1007,3 +863,67 @@ taskCard({
         ),
       ),
     );
+
+
+
+Widget buildFloatingSearchBar(context,FloatingSearchBarController controller) {
+  final isPortrait =
+      MediaQuery.of(context).orientation == Orientation.portrait;
+
+  return Container(
+    height: 500,
+    child: FloatingSearchBar(
+
+      controller:controller ,
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+      elevation: 0,
+      backgroundColor: Color.fromARGB(255, 119, 119, 119),
+      hint: 'Search...',
+      hintStyle: TextStyle(color: Colors.white54),
+      scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
+      transitionDuration: const Duration(milliseconds: 800),
+      transitionCurve: Curves.easeInOut,
+      physics: const BouncingScrollPhysics(),
+      axisAlignment: isPortrait ? 0.0 : -1.0,
+      openAxisAlignment: 0.0,
+      width: isPortrait ? 600 : 500,
+      openWidth: 600,
+      debounceDelay: const Duration(milliseconds: 500),
+      onQueryChanged: (query) {
+        // Call your model, bloc, controller here.
+      },
+      // Specify a custom transition to be used for
+      // animating between opened and closed stated.
+      transition: CircularFloatingSearchBarTransition(),
+      actions: [
+        FloatingSearchBarAction(
+          showIfOpened: false,
+          child: CircularButton(
+            icon: const Icon(Icons.search_rounded,color: Colors.white,),
+            onPressed: () {},
+          ),
+        ),
+        FloatingSearchBarAction.searchToClear(
+          showIfClosed: false,
+        ),
+      ],
+
+      iconColor: Colors.white,
+      builder: (context, transition) {
+        return ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Material(
+            color: Colors.white,
+            elevation: 4.0,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: Colors.accents.map((color) {
+                return Container(height: 112, color: color);
+              }).toList(),
+            ),
+          ),
+        );
+      },
+    ),
+  );
+}

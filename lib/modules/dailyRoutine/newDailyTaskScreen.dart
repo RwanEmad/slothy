@@ -1,22 +1,12 @@
+
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-
-import '../../models/models.dart';
+//import 'package:table_calendar/table_calendar.dart';
 import '../../shared/components/component.dart';
-import '../../shared/style/styles.dart';
-
-
-import 'package:intl/date_symbol_data_local.dart';
-
-import 'endTimeTableCalenderScreen.dart';
-
-// import 'pages/basics_example.dart';
-// import 'pages/complex_example.dart';
-// import 'pages/events_example.dart';
-// import 'pages/multi_example.dart';
-// import 'pages/range_example.dart';
+import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 
 class newDailyTaskScreen extends StatefulWidget {
   const newDailyTaskScreen({Key? key}) : super(key: key);
@@ -99,12 +89,11 @@ class _newDailyTaskScreenState extends State<newDailyTaskScreen> {
 
    var endeDateSaveIcone=Icons.calendar_month_rounded;
    bool showCalender=false;
-
+  var white=Colors.white;
 ///////////////////////////////
   @override
   Widget build(BuildContext context) {
     endDateController.text=dateFormat.format(selectedDay);
-
     return Scaffold(
       backgroundColor:Color.fromARGB(255, 36, 36, 36),
       body: SafeArea(
@@ -121,11 +110,21 @@ class _newDailyTaskScreenState extends State<newDailyTaskScreen> {
                     children: [
                       IconButton(
                         onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios_new_rounded,
+                          color: white,
+                          size: 25,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
 
                         },
                         icon: Icon(
                           Icons.restart_alt_outlined,
-                          color: Colors.white,
+                          color: white,
                           size: 30,
                         ),
                       ),
@@ -134,7 +133,7 @@ class _newDailyTaskScreenState extends State<newDailyTaskScreen> {
                           child: Text(
                             "Create your task",
                             style: TextStyle(
-                                color: Colors.white,
+                                color: white,
                                 fontSize: 24,
                                 fontWeight: FontWeight.w600,
                                 fontStyle: FontStyle.italic),
@@ -142,9 +141,8 @@ class _newDailyTaskScreenState extends State<newDailyTaskScreen> {
                         ),
                       ),
                       TextButton(onPressed: (){}, child:Text("Save",style: TextStyle(
-                          color: Colors.white,
+                          color: white,
                           fontSize: 22,
-
                           fontStyle: FontStyle.italic),))
                     ],
                   ),
@@ -179,14 +177,14 @@ class _newDailyTaskScreenState extends State<newDailyTaskScreen> {
                       horizontal: 20.0, vertical: 10),
                   child: TextField(
                     style: TextStyle(
-                        color: Colors.white,
+                        color:white,
                         fontSize: 18,
                         fontWeight: FontWeight.w300,
                         fontStyle: FontStyle.italic),
                     onSubmitted: (s){ },
                     minLines: 6,
                     maxLines: 12,
-                    cursorColor: Colors.white,
+                    cursorColor:white,
                     cursorHeight: 30,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -379,7 +377,7 @@ class _newDailyTaskScreenState extends State<newDailyTaskScreen> {
                                         child: Text(
                                           text,
                                           style: TextStyle(
-                                            fontSize:22,color: Colors.white,),
+                                            fontSize:22,color: white,),
                                         ),
                                       );
                                     }
@@ -440,7 +438,7 @@ class _newDailyTaskScreenState extends State<newDailyTaskScreen> {
                                   todayDecoration: BoxDecoration(color: Colors.white38,shape:BoxShape.circle,
                                   ),
                                   selectedTextStyle: TextStyle(
-                                    color: Colors.white,
+                                    color: white,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w300,
                                     fontStyle: FontStyle.italic,
@@ -515,6 +513,8 @@ class _newDailyTaskScreenState extends State<newDailyTaskScreen> {
                     ),
                   ]
                 ),
+
+
 
 
                 Padding(

@@ -4,7 +4,8 @@ import 'package:slothy/modules/welcomeScreen.dart';
 import '../models/models.dart';
 import '../shared/components/component.dart';
 import 'dailyRoutine/newRoutineScreen.dart';
-
+import 'homeMenueScreen.dart';
+import 'package:anim_search_bar/anim_search_bar.dart';
 class homeScreen extends StatefulWidget {
   const homeScreen({Key? key}) : super(key: key);
 
@@ -13,8 +14,17 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
+  TextEditingController searchTextController = TextEditingController();
+  var white=Colors.white;
+  var dailyDefaultRoutineColor=[
+    Color.fromARGB(255, 119, 204, 238),//'Morning Routin',
+    Color.fromARGB(255, 76, 57, 104),// 'Evening Routin',
+    Color.fromARGB(255, 176, 115, 200),// 'Sport Routin',
+    Color.fromARGB(255, 112, 196, 157),// 'Challeng Routin ',
+  ];
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
         child: SingleChildScrollView(
       child: Column(
@@ -22,29 +32,55 @@ class _homeScreenState extends State<homeScreen> {
           Center(
               child: Padding(
             padding: const EdgeInsets.only(
+
+              right: 10,
               top: 15.0,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Sl",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext) => homeMenueScreen()));
+                  },
+                  icon: Icon(
+                    Icons.menu_rounded,
+                    color: white,
+                    size: 35,
+                  ),
                 ),
-                Image.asset(
-                  "assets/logo/img.png",
-                  height: 35,
-                  width: 35,
-                ),
-                Text(
-                  "thy",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600),
+                Expanded(
+                  child: Center(
+                      child: Padding(
+                    padding: const EdgeInsets.only(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Sl",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 28,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Image.asset(
+                          "assets/logo/img.png",
+                          height: 35,
+                          width: 35,
+                        ),
+                        Text(
+                          "thy",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 28,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  )),
                 ),
               ],
             ),
@@ -94,12 +130,12 @@ class _homeScreenState extends State<homeScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20, bottom: 10),
+            padding: const EdgeInsets.only(top: 20, bottom: 10,left: 15),
             child: Row(
               children: [
-                SizedBox(
-                  width: 40,
-                ),
+                // SizedBox(
+                //   width: 40,
+                // ),
                 Text(
                   "Your Daily Routine...",
                   style: TextStyle(
@@ -110,23 +146,25 @@ class _homeScreenState extends State<homeScreen> {
                 SizedBox(
                   width: 75,
                 ),
-                IconButton(
-                    iconSize: 40,
-                    color: Colors.white,
-                    onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (BuildContext context) {
-                            return dailyRoutinScreen();
-                          }));
-                    },
-                    icon: Icon(
-                      Icons.edit_note_rounded,
-                    )),
+                Expanded(
+                  child: IconButton(
+                      iconSize: 40,
+                      color: white,
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return dailyRoutinScreen();
+                        }));
+                      },
+                      icon: Icon(
+                        Icons.edit_note_rounded,
+                      )),
+                ),
               ],
             ),
           ),
           Container(
-            height: 180,
+            height: 150,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
@@ -136,6 +174,7 @@ class _homeScreenState extends State<homeScreen> {
               itemBuilder: (context, index) {
                 return dailyHomeCard(
                   title: dailyTitleList[index],
+                  backGroundColor: dailyDefaultRoutineColor[index],
                   ontap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
@@ -146,44 +185,43 @@ class _homeScreenState extends State<homeScreen> {
               },
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              SizedBox(
-                width: 40,
-              ),
-              Text(
-                "Your Goals",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                width: 150,
-              ),
-              MaterialButton(
-                onPressed: () {},
-                child: Image.asset(
-                  "assets/icons/dart-board.png",
-                  color: Colors.white,
-                  width: 35,
-                  height: 35,
+
+          Padding(
+            padding: const EdgeInsets.only( bottom: 10,left: 15,top: 10),
+            child: Row(
+              children: [
+                Text(
+                  "Your Goals",
+                  style: TextStyle(
+                      color: white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w600),
                 ),
-              )
-            ],
+                SizedBox(
+                  width: 150,
+                ),
+                Expanded(
+                  child: IconButton(
+                    onPressed: () {},
+                    icon:  ImageIcon(
+                      AssetImage("assets/icons/dart-board.png"),
+                      color: white,
+                      size:40,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
           SizedBox(
             height: 10,
           ),
           Container(
-            height: 400,
+            height: 230,
             child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: goalsList.length,
-                scrollDirection: Axis.vertical,
+                scrollDirection: Axis.horizontal,
                 primary: false,
                 //solution of slow scroll//////
                 physics: BouncingScrollPhysics(),

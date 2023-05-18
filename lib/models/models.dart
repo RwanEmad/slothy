@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '../modules/calender/calenderScreen.dart';
 import '../modules/commingsoonScreen.dart';
 import '../modules/dailyRoutine/dailyRoutinScreen.dart';
@@ -13,6 +15,8 @@ List <String> dailyTitleList=[
   'Sport Routin',
   'Challeng Routin ',
 ];
+
+
 
 List <String> dailyTaskList=[
   'Daily habits',
@@ -70,8 +74,6 @@ List goalsList=[
   'Gratitude time',
 
 ];
-
-
 List rulesList=[
   'Promodoro',
   'Promodoro',
@@ -82,3 +84,18 @@ List rulesList=[
   'Promodoro',
 
 ];
+
+List homeMenue=[
+  "Home",
+  "Notes",
+  "Calender",
+  "My Profile",
+  "My Goalse",
+  "My Routine",
+  "Calenges",
+  "Settings",
+];
+
+
+
+

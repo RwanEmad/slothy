@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 import 'package:slothy/modules/dailyRoutine/newDailyTaskScreen.dart';
 
 import '../../shared/components/component.dart';
@@ -13,7 +14,7 @@ class newRoutineScreen extends StatefulWidget {
 
 class _newRoutineScreenState extends State<newRoutineScreen> {
   var routinTitleController = TextEditingController();
-
+  final FloatingSearchBarController controller = FloatingSearchBarController();
   String titleLable = "Routine Title";
   bool floatingLable = true;
   bool checkBoxValue = false;
@@ -31,6 +32,7 @@ class _newRoutineScreenState extends State<newRoutineScreen> {
   '10 Gratitude time',
   ];
 
+ var white=Colors.white;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery
@@ -40,13 +42,13 @@ class _newRoutineScreenState extends State<newRoutineScreen> {
     var width = size.width; //872.7272727272727
 
     return Scaffold(
-      // backgroundColor: Color.fromARGB(255, 34, 34, 34),
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          SafeArea(
-            child: SingleChildScrollView(
+      backgroundColor: Color.fromARGB(255, 34, 34, 34),
+      // backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      body: SafeArea(
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -57,11 +59,13 @@ class _newRoutineScreenState extends State<newRoutineScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           icon: Icon(
-                            Icons.menu_rounded,
-                            color: Colors.black,
-                            size: 35,
+                            Icons.arrow_back_ios_new_rounded,
+                            color: white,
+                            size: 25,
                           ),
                         ),
                         Expanded(
@@ -69,7 +73,7 @@ class _newRoutineScreenState extends State<newRoutineScreen> {
                             child: Text(
                               "Create your routin",
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: white,
                                   fontSize: 22,
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.italic),
@@ -81,7 +85,7 @@ class _newRoutineScreenState extends State<newRoutineScreen> {
                             child: Text(
                               "Save",
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: white,
                                   fontSize: 22,
                                   fontStyle: FontStyle.italic),
                             )),
@@ -90,16 +94,17 @@ class _newRoutineScreenState extends State<newRoutineScreen> {
                   ),
 
                   //*******************************SearchBar******************************//
-
+                  SizedBox(height: 40,),
                   Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10),
                       child: textFormField(
-                        lableColor: Color.fromARGB(255, 0, 0, 0),
-                        inputTextColor: Color.fromARGB(255, 0, 0, 0),
+                        cursorColor:white,
+                        lableColor:white,
+                        inputTextColor:white,
                         lableSize: 26,
                         inputTextSize: 26,
-                        // fontWeight:FontWeight.w600,
+                        fontWeight:FontWeight.w600,
                         controller: routinTitleController,
                         lable: titleLable,
                         floatingLable: floatingLable,
@@ -116,11 +121,10 @@ class _newRoutineScreenState extends State<newRoutineScreen> {
                         enabledBorder: false,
                       )),/////////Routine Title
 
-
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: Container(
-                      height: height - 260,
+                      height: height - 305,
                       child: ReorderableListView.builder(
                         scrollDirection: Axis.vertical,
                         shrinkWrap: true,
@@ -138,7 +142,7 @@ class _newRoutineScreenState extends State<newRoutineScreen> {
                         },
                         itemBuilder:(context, index) {
                           return
-                            taskCard(
+                            taskCard(checkBoxBorderColor: white,
                                key: Key('$index'),
                                 taskTitle: crumbsList[index],
                                 onTap: () {
@@ -188,7 +192,7 @@ class _newRoutineScreenState extends State<newRoutineScreen> {
                             style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.w300,
-                              color: Colors.white,
+                              color: white,
                             ),
                           ),
                         ),
@@ -198,8 +202,16 @@ class _newRoutineScreenState extends State<newRoutineScreen> {
                 ],
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 60.0,
+                right: 20,
+                left: 20,
+              ),
+              child: buildFloatingSearchBar(context,controller),
+            ),
+          ],
+        ),
       ),
     );
   }
