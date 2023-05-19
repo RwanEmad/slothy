@@ -598,7 +598,7 @@ crumbsCard({
 
 dailyRoutinCard({
   bool checkBoxValue = true,
-  required Function? onCheckBoxChange,
+  Function? onCheckBoxChange,
   required Function? onTap,
   String? Title,
    List? taskTitle,
@@ -676,7 +676,7 @@ dailyRoutinCard({
 
 const leftTimeColor = Color.fromARGB(124, 255, 0, 0);
 
-taskCard({
+Widget taskCard({
   required String? taskTitle,
     Key? key,
   String? repeat = "Repeat",
@@ -698,7 +698,7 @@ taskCard({
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 8, right: 5),
         child: Container(
-          // color: Colors.blueAccent,
+          color: Color.fromARGB(255, 34, 34, 34),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -56,15 +56,19 @@ Map <String,dynamic> homeMap= {
 
 };
 
-List <String> crumbsList=[
-  'Daily habits  Daily habits',
-  'Goals Daily habits',
-  'Calender',
-  'Gratitude time',
- 'Calender',
-  'Gratitude time',
-
+List <String>crumbsList=[
+  '1 Daily habits  Daily habits',
+  '2 Goals Daily habits',
+  '3 Calender',
+  '4 Gratitude time',
+  '5 Calender',
+  '6 Gratitude time',
+  '7 Calender',
+  '8 Gratitude time',
+  '9 Calender',
+  '10 Gratitude time',
 ];
+
 List goalsList=[
   'Daily habits  Daily habits',
   'Goals Daily habits',
