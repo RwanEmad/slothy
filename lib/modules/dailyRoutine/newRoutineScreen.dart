@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 import 'package:slothy/modules/dailyRoutine/dailyRoutineCubit/cubit.dart';
 import 'package:slothy/modules/dailyRoutine/dailyRoutineCubit/states.dart';
-import 'package:slothy/modules/dailyRoutine/newDailyTaskScreen.dart';
+import 'package:slothy/modules/dailyRoutine/newRoutineTaskScreen.dart';
 import 'package:slothy/shared/cubit/cubit.dart';
 
+import '../../layout/Home_layout.dart';
 import '../../models/models.dart';
 import '../../shared/components/component.dart';
 
@@ -15,7 +16,7 @@ class newRoutineScreen extends StatelessWidget {
   final FloatingSearchBarController controller = FloatingSearchBarController();
   String titleLable = "Routine Title";
 
-  bool checkBoxValue = false;
+
   bool enabledBorder = false;
   var white=Colors.white;
   @override
@@ -30,8 +31,50 @@ class newRoutineScreen extends StatelessWidget {
           newRoutineCubit.mediaQuery(context);
           double height=newRoutineCubit.height!;
           return  Scaffold(
-            backgroundColor: Color.fromARGB(255, 34, 34, 34),
+           // backgroundColor: Color.fromARGB(255, 34, 34, 34),
             // backgroundColor: Color.fromARGB(255, 255, 255, 255),
+            appBar: AppBar(
+              leading:IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon:  Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  size: 30,
+                ),
+              ),
+              title: Text(
+                "Create Routine",
+              ),
+              titleTextStyle: TextStyle(
+                  fontSize: 22
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (context) => homeScreen(),));
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                          return Home_layout();
+                        }));
+                  },
+                  icon: Icon(Icons.home),
+                ),
+                 Padding(
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: IconButton(
+                      onPressed: () {
+                        // Navigator.of(context).push(MaterialPageRoute(builder: (context) => homeScreen(),));
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                              return Home_layout();
+                            }));
+                      },
+                      icon: Icon(Icons.done),
+                    )),
+
+              ],
+            ),
             body: SafeArea(
               child: Stack(
                 fit: StackFit.expand,
@@ -40,56 +83,60 @@ class newRoutineScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: Icon(
-                                  Icons.arrow_back_ios_new_rounded,
-                                  color: white,
-                                  size: 25,
-                                ),
-                              ),
-                              Expanded(
-                                child: Center(
-                                  child: Text(
-                                    "Create your routin",
-                                    style: TextStyle(
-                                        color: white,
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w400,
-                                        fontStyle: FontStyle.italic),
-                                  ),
-                                ),
-                              ),
-                              TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    "Save",
-                                    style: TextStyle(
-                                        color: white,
-                                        fontSize: 22,
-                                        fontStyle: FontStyle.italic),
-                                  )),
-                            ],
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(
+                        //       horizontal: 10.0, vertical: 10),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.start,
+                        //     children: [
+                        //       IconButton(
+                        //         onPressed: () {
+                        //           Navigator.pop(context);
+                        //         },
+                        //         icon: Icon(
+                        //           Icons.arrow_back_ios_new_rounded,
+                        //          // color: white,
+                        //           size: 25,
+                        //         ),
+                        //       ),
+                        //       Expanded(
+                        //         child: Center(
+                        //           child: Text(
+                        //             "Create your routin",
+                        //             style: Theme.of(context).textTheme.headline4,
+                        //             // style: TextStyle(
+                        //             //     color: white,
+                        //             //     fontSize: 22,
+                        //             //     fontWeight: FontWeight.w400,
+                        //             //     fontStyle: FontStyle.italic),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       TextButton(
+                        //           onPressed: () {},
+                        //           child: Text(
+                        //             "Save",
+                        //             style:Theme.of(context).textTheme.headline1,
+                        //             // style: TextStyle(
+                        //             //     color: white,
+                        //             //     fontSize: 22,
+                        //             //     fontStyle: FontStyle.italic),
+                        //           )),
+                        //     ],
+                        //   ),
+                        // ),
 
                         //*******************************SearchBar******************************//
                         SizedBox(height: 40,),
                         Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 10),
+                            padding: const EdgeInsets.only(
+                              left: 20,right: 20,top: 35,bottom: 0
+                                //horizontal: 20.0, vertical: 10
+                            ),
                             child: textFormField(
-                              cursorColor:white,
-                              lableColor:white,
-                              inputTextColor:white,
+                              cursorColor: Theme.of(context).textTheme.headline4?.color,
+                              lableColor:Theme.of(context).textTheme.headline4?.color,
+                              inputTextColor:Theme.of(context).textTheme.headline4?.color,
                               lableSize: 26,
                               inputTextSize: 26,
                               fontWeight:FontWeight.w600,
@@ -121,28 +168,33 @@ class newRoutineScreen extends StatelessWidget {
                               },
                               itemBuilder:(context, index) {
                                 return taskCard(
-                                      checkBoxBorderColor: white,
+                                      context: context,
+                                      checkBoxBorderColor: Theme.of(context).textTheme.headline4?.color,
                                       key: Key('$index'),
                                       taskTitle: crumbsList[index],
                                       onTap: () {
                                         Navigator.push(context, MaterialPageRoute(
                                             builder: (BuildContext context) {
-                                              return newDailyTaskScreen();
+                                              return newRoutineTaskScreen();
                                             }));
                                       },
                                       editOnPressed: () {
                                         Navigator.push(context, MaterialPageRoute(
                                             builder: (BuildContext context) {
-                                              return newDailyTaskScreen();
+                                              return newRoutineTaskScreen();
                                             }));
                                       },
                                       deleteOnPressed: () {
                                         Navigator.push(context, MaterialPageRoute(
                                             builder: (BuildContext context) {
-                                              return newDailyTaskScreen();
+                                              return newRoutineTaskScreen();
                                             }));
                                       },
-                                      checkBoxValue: checkBoxValue);
+                                      checkBoxValue: newRoutineCubit.checkBoxValue,
+                                      onChangedCheckBox: (newvalue){
+                                        newRoutineCubit.checkBox(newvalue);
+                                      }
+                                );
                               },
                             ),
                           ),
@@ -153,26 +205,31 @@ class newRoutineScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 5.0),
                             child: ButtonTheme(
+                              buttonColor: Theme.of(context).buttonTheme.colorScheme?.primary,
+                              textTheme:Theme.of(context).buttonTheme.textTheme,
                               height: 60,
                               minWidth: 100,
                               child: MaterialButton(
+
                                 onPressed: () {
                                   Navigator.push(context, MaterialPageRoute(
                                       builder: (BuildContext context) {
-                                        return newDailyTaskScreen();
+                                        return newRoutineTaskScreen();
                                       }));
                                 },
-                                color: Color.fromARGB(255, 25, 85, 113),
+                                color: Theme.of(context).buttonTheme.colorScheme?.primary,
+                               // color: Color.fromARGB(255, 25, 85, 113),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(45),
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
                                 child: Text(
                                   "Creat your own",
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w300,
-                                    color: white,
-                                  ),
+                                  style:Theme.of(context).textTheme.headline6,
+                                  // style: TextStyle(
+                                  //   fontSize: 22,
+                                  //   fontWeight: FontWeight.w300,
+                                  //   color: white,
+                                  // ),
                                 ),
                               ),
                             ),
@@ -183,7 +240,7 @@ class newRoutineScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 60.0,
+                      //top: 60.0,
                       right: 20,
                       left: 20,
                     ),

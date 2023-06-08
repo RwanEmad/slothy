@@ -22,7 +22,7 @@ class _settingsScreenState extends State<settingsScreen> {
             width: double.infinity,
             clipBehavior: Clip.antiAliasWithSaveLayer,
             decoration: BoxDecoration(
-              color: lavander,
+              color: lavender,
               borderRadius: BorderRadius.circular(30),
             ),
             child: Column(

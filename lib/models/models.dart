@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:slothy/modules/note/noteScreen.dart';
 
 import '../modules/calender/calenderScreen.dart';
 import '../modules/commingsoonScreen.dart';
-import '../modules/dailyRoutine/dailyRoutinScreen.dart';
+import '../modules/dailyRoutine/routinScreen.dart';
 import '../modules/goals/goalsScreen.dart';
 import '../modules/gratitude/gratitudeScreen.dart';
 import '../modules/homeScreen.dart';
+import '../layout/noteLayout.dart';
 import '../modules/profileScreen.dart';
 import '../modules/setting/settingsScreen.dart';
 
@@ -43,8 +45,9 @@ List  ScreenList=[
 List  toggelScreensList=[
   homeScreen(),
   calenderScreen(),
+  noteLayout(),
   profileScreen(),
-  settingsScreen(),
+  // settingsScreen(),
 ];
 
 Map <String,dynamic> homeMap= {

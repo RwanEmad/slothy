@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slothy/modules/dailyRoutine/dailyRoutineCubit/cubit.dart';
 import 'package:slothy/shared/cubit/states.dart';
 
-import '../../modules/dailyRoutine/dailyRoutinScreen.dart';
+import '../../modules/dailyRoutine/routinScreen.dart';
 
 class AppCubit extends Cubit<AppStates> {
   AppCubit() : super(AppInitialState());
@@ -19,11 +19,18 @@ class AppCubit extends Cubit<AppStates> {
     emit(AppChangeBottomNavBarState());
   }
 
-  void navToDailyRoutine(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      return dailyRoutinScreen();
-    }));
-    emit(NavigateToDailyRoutineScreen());
+  bool isDark =true;
+
+  void changeAppMode(){
+    isDark=!isDark;
+    emit(AppChangeModeState());
   }
+
+  // void navToDailyRoutine(BuildContext context) {
+  //   Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+  //     return dailyRoutinScreen();
+  //   }));
+  //   emit(NavigateToDailyRoutineScreen());
+  // }
 
 }

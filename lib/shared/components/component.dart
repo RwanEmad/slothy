@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
-import 'package:slothy/modules/dailyRoutine/dailyRoutinScreen.dart';
+import 'package:slothy/modules/dailyRoutine/routinScreen.dart';
 import '../../models/models.dart';
 import '../style/colors.dart';
 import '../style/styles.dart';
@@ -9,7 +9,7 @@ import '../style/styles.dart';
 Widget defaultButton({
   required String text,
   required var textColor,
-  required var buttonColor,
+   var buttonColor,
   required Function function,
   var borderSideColor = blue,
   bool borderSide = false,
@@ -30,6 +30,7 @@ Widget defaultButton({
         borderRadius: BorderRadius.circular(radius),
       ),
       child: MaterialButton(
+
         color: buttonColor,
         shape: borderSide
             ? RoundedRectangleBorder(
@@ -147,7 +148,7 @@ textFormField({
   int maxLines = 1,
   String? lable, //*
   String? hintText, //*
-  double? feildHeight=60,
+  double? feildHeight = 60,
   bool enabledBorder = true,
   IconData? prefix,
   IconData? suffix,
@@ -160,7 +161,7 @@ textFormField({
   var textAlignVertical = TextAlignVertical.center,
   var inputTextColor = Colors.white,
   double inputTextSize = 22,
-  bool filled=false,
+  bool filled = false,
   var fillColor,
   var underLineBorderColor = Colors.white,
   var lableColor = Colors.white,
@@ -170,8 +171,8 @@ textFormField({
   var hintLableColor = Colors.white54,
   double hintLableSize = 22,
   bool floatingLable = true,
-  var floatingLableColor=Colors.white54,
-  var fontWeight=FontWeight.w500,
+  var floatingLableColor = Colors.white54,
+  var fontWeight = FontWeight.w500,
   //*
 }) =>
     Container(
@@ -188,18 +189,21 @@ textFormField({
         textAlignVertical: textAlignVertical,
         textAlign: TextAlign.start,
         controller: controller,
-        keyboardType: keyboardMultilines ? TextInputType.multiline : keyboardType,
+        keyboardType:
+            keyboardMultilines ? TextInputType.multiline : keyboardType,
         obscureText: false,
         onFieldSubmitted: (s) {
           onSubmit!();
         },
         decoration: InputDecoration(
-          filled:filled ,
-          fillColor:fillColor,
+          filled: filled,
+          fillColor: fillColor,
           floatingLabelBehavior:
               floatingLable ? null : FloatingLabelBehavior.never,
-          enabledBorder: enabledBorder ? UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white, width: 2)) : InputBorder.none,
+          enabledBorder: enabledBorder
+              ? UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white, width: 2))
+              : InputBorder.none,
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.white, width: 2)),
           floatingLabelStyle: TextStyle(
@@ -209,12 +213,12 @@ textFormField({
           ),
           labelText: enableLable ? lable : null,
           labelStyle: TextStyle(
-              fontSize: lableSize,
-              fontWeight: fontWeight,
-              color: lableColor,
-              fontStyle: italic,
-              ),
-              prefixIcon: prefix != null
+            fontSize: lableSize,
+            fontWeight: fontWeight,
+            color: lableColor,
+            fontStyle: italic,
+          ),
+          prefixIcon: prefix != null
               ? IconButton(
                   icon: Icon(prefix),
                   onPressed: () {
@@ -237,7 +241,7 @@ textFormField({
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide(
-              color:underLineBorderColor,
+              color: underLineBorderColor,
               style: BorderStyle.solid,
             ),
           ),
@@ -249,13 +253,13 @@ outLinedFormField({
   required TextEditingController controller, //*
   TextInputType keyboardType = TextInputType.text, //*
   bool ispassowrd = false,
-  bool? readOnly=false,
+  bool? readOnly = false,
   bool keyboardMultilines = false,
   int maxLines = 1,
   String? lable, //*
   String? hintText, //*
   bool enabledBorder = true,
-  double? feildHeight=60,
+  double? feildHeight = 60,
   IconData? prefix,
   IconData? suffix,
   Function? onSubmit, //*
@@ -266,10 +270,10 @@ outLinedFormField({
   Function? prefixPressed,
   var textAlignVertical = TextAlignVertical.center,
   var inputTextColor = Colors.white,
-  var suffixIconColor=Colors.white60,
+  var suffixIconColor = Colors.white60,
   double inputTextSize = 22,
-  bool filled=false,
-   fillColor=Colors.white,
+  bool filled = false,
+  fillColor = Colors.white,
   var underLineBorderColor = Colors.white,
   var lableColor = Colors.white,
   double lableSize = 24,
@@ -278,13 +282,13 @@ outLinedFormField({
   var hintLableColor = Colors.white54,
   double hintLableSize = 22,
   bool floatingLable = true,
-  var floatingLableColor=Colors.white54,
+  var floatingLableColor = Colors.white54,
   //*
 }) =>
     Container(
       height: feildHeight,
       child: TextFormField(
-         readOnly: readOnly!,
+        readOnly: readOnly!,
         style: TextStyle(
           fontSize: inputTextSize,
           color: inputTextColor,
@@ -296,22 +300,29 @@ outLinedFormField({
         textAlignVertical: textAlignVertical,
         textAlign: TextAlign.start,
         controller: controller,
-        keyboardType: keyboardMultilines ? TextInputType.multiline : keyboardType,
+        keyboardType:
+            keyboardMultilines ? TextInputType.multiline : keyboardType,
         obscureText: false,
         onFieldSubmitted: (s) {
           onSubmit!();
         },
         decoration: InputDecoration(
-          filled:filled ,
-          fillColor:fillColor,
+          filled: filled,
+          fillColor: fillColor,
           floatingLabelBehavior:
               floatingLable ? null : FloatingLabelBehavior.never,
-          enabledBorder: enabledBorder ? OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-                  borderSide: BorderSide(color: fillColor, )) : InputBorder.none,
+          enabledBorder: enabledBorder
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(
+                    color: fillColor,
+                  ))
+              : InputBorder.none,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
-              borderSide: BorderSide(color: fillColor, )),
+              borderSide: BorderSide(
+                color: fillColor,
+              )),
           floatingLabelStyle: TextStyle(
             fontSize: 22,
             color: floatingLableColor,
@@ -319,12 +330,12 @@ outLinedFormField({
           ),
           labelText: enableLable ? lable : null,
           labelStyle: TextStyle(
-              fontSize: lableSize,
-              fontWeight: FontWeight.w500,
-              color: lableColor,
-              fontStyle: italic,
-              ),
-              prefixIcon: prefix != null
+            fontSize: lableSize,
+            fontWeight: FontWeight.w500,
+            color: lableColor,
+            fontStyle: italic,
+          ),
+          prefixIcon: prefix != null
               ? IconButton(
                   icon: Icon(prefix),
                   onPressed: () {
@@ -346,7 +357,7 @@ outLinedFormField({
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide(
-              color:underLineBorderColor,
+              color: underLineBorderColor,
               style: BorderStyle.solid,
             ),
           ),
@@ -354,14 +365,14 @@ outLinedFormField({
       ),
     );
 
-
 dailyHomeCard({
+  required context,
   var color = Colors.white10,
   required String title,
-   String? text,
+  String? text,
   Function? ontap,
-  String? backGround , //assets/images/70e2f9d4191154624f58c15eb684e27a.jpg
-  var backGroundColor ,
+  String? backGround, //assets/images/70e2f9d4191154624f58c15eb684e27a.jpg
+  var backGroundColor,
   var ContentList,
 }) =>
     GestureDetector(
@@ -379,26 +390,28 @@ dailyHomeCard({
             ),
             child: Stack(children: [
               Container(
-                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                  decoration: BoxDecoration(
-
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: backGround!=null?Image.asset(
-                    backGround!,
-                    fit: BoxFit.cover,
-                    height: 180,
-                    width: 180,
-                  ):null,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: backGround != null
+                    ? Image.asset(
+                        backGround!,
+                        fit: BoxFit.cover,
+                        height: 180,
+                        width: 180,
+                      )
+                    : null,
               ),
               Center(
                 child: Text(
                   title!,
-                  style: TextStyle(
-
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
+                  style:Theme.of(context).textTheme.headline2
+                  // TextStyle(
+                  //     color: Colors.white,
+                  //     fontSize: 18,
+                  //     fontWeight: FontWeight.w600)
+                  ,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
@@ -409,6 +422,7 @@ dailyHomeCard({
     );
 
 goalsCard({
+  required context,
   var color,
   required String taskTitle,
   String? rule,
@@ -427,12 +441,12 @@ goalsCard({
           width: 330,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           decoration: BoxDecoration(
-            color: Colors.white38,
+            color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 15.0,right: 15, bottom: 10,top: 10),
+            padding: const EdgeInsets.only(
+                left: 15.0, right: 15, bottom: 10, top: 10),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -444,23 +458,27 @@ goalsCard({
                       flex: 2,
                       child: Text(
                         taskTitle,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600),
+                        style:Theme.of(context).textTheme.headline2,
+                        // style: TextStyle(
+                        //     color: Colors.white,
+                        //     fontSize: 18,
+                        //     fontWeight: FontWeight.w600),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SizedBox(width: 40,),
+                    SizedBox(
+                      width: 40,
+                    ),
                     Expanded(
                       flex: 1,
                       child: Text(
                         rule!,
-                        style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400),
+                        style:Theme.of(context).textTheme.bodyText1,
+                        // style: TextStyle(
+                        //     color: Colors.white60,
+                        //     fontSize: 16,
+                        //     fontWeight: FontWeight.w400),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -477,10 +495,11 @@ goalsCard({
                     ),
                     Text(
                       "Crumbs : ",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400),
+                      style:Theme.of(context).textTheme.bodyText1,
+                      // style: TextStyle(
+                      //     color: Colors.white,
+                      //     fontSize: 16,
+                      //     fontWeight: FontWeight.w400),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -499,8 +518,7 @@ goalsCard({
                       //solution of slow scroll//////
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return crumbsCard(
-                            crumbTitle: crumbTitlesList![index]);
+                        return crumbsCard(crumbTitle: crumbTitlesList![index], context: context);
                       }),
                 ), //crumbsListView
                 //Crumbs card
@@ -513,10 +531,11 @@ goalsCard({
                       flex: 1,
                       child: Text(
                         "2/10/2022",
-                        style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                        style:Theme.of(context).textTheme.bodyText2,
+                        // style: TextStyle(
+                        //     color: Colors.white60,
+                        //     fontSize: 14,
+                        //     fontWeight: FontWeight.w600),
                       ),
                     ),
                     SizedBox(
@@ -526,19 +545,20 @@ goalsCard({
                       flex: 2,
                       child: Text(
                         "Deadline : " + "13/6/2023",
-                        style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600),
+                        style:Theme.of(context).textTheme.bodyText2,
+                        // style: TextStyle(
+                        //     color: Colors.white60,
+                        //     fontSize: 14,
+                        //     fontWeight: FontWeight.w600),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
                 ), //Start &deadline
-               // // SizedBox(
-               //    height: 20,
-               //  ),
+                // // SizedBox(
+                //    height: 20,
+                //  ),
               ],
             ),
           ),
@@ -547,6 +567,7 @@ goalsCard({
     );
 
 crumbsCard({
+  required context,
   required String crumbTitle,
   Function? onPressed,
 }) =>
@@ -557,7 +578,7 @@ crumbsCard({
           height: 35,
           width: double.infinity,
           decoration: BoxDecoration(
-            color: Color.fromARGB(219, 221, 184, 146),
+            color: Theme.of(context).colorScheme.onPrimary,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
@@ -569,10 +590,7 @@ crumbsCard({
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
                     crumbTitle,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400),
+                      style:Theme.of(context).textTheme.bodyText1,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -597,11 +615,12 @@ crumbsCard({
     );
 
 dailyRoutinCard({
+  required context,
   bool checkBoxValue = true,
   Function? onCheckBoxChange,
   required Function? onTap,
   String? Title,
-   List? taskTitle,
+  List? taskTitle,
   List? taskStart,
   List? taskFinish,
 }) {
@@ -616,7 +635,8 @@ dailyRoutinCard({
           width: double.infinity,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           decoration: BoxDecoration(
-            color: Colors.white12,
+            color: lavender,
+            //color: Colors.white12,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Row(
@@ -635,11 +655,12 @@ dailyRoutinCard({
                     children: [
                       Text(
                         Title!,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.italic),
+                        style:Theme.of(context).textTheme.headline4,
+                        // style: TextStyle(
+                        //     color: Colors.white,
+                        //     fontSize: 24,
+                        //     fontWeight: FontWeight.w400,
+                        //     fontStyle: FontStyle.italic),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -648,11 +669,12 @@ dailyRoutinCard({
                       ),
                       Text(
                         "Open the doors to a productivity day",
-                        style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w300,
-                            fontStyle: FontStyle.italic),
+                        style:Theme.of(context).textTheme.headline3,
+                        // style: TextStyle(
+                        //     color: Colors.white60,
+                        //     fontSize: 18,
+                        //     fontWeight: FontWeight.w300,
+                        //     fontStyle: FontStyle.italic),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -677,13 +699,14 @@ dailyRoutinCard({
 const leftTimeColor = Color.fromARGB(124, 255, 0, 0);
 
 Widget taskCard({
+  required context,
   required String? taskTitle,
-    Key? key,
+  Key? key,
   String? repeat = "Repeat",
   var taskTitleColor = Colors.black,
   var textColor = Colors.black,
-  var checkBoxBorderColor=Colors.black,
-  String? taskIconPath='assets/icons/love-letter.png',
+  var checkBoxBorderColor = Colors.black,
+  String? taskIconPath = 'assets/icons/love-letter.png',
   required Function? onTap,
   Function? editOnPressed,
   Function? deleteOnPressed,
@@ -698,7 +721,7 @@ Widget taskCard({
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 8, right: 5),
         child: Container(
-          color: Color.fromARGB(255, 34, 34, 34),
+          color: Theme.of(context).scaffoldBackgroundColor,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -707,23 +730,23 @@ Widget taskCard({
                 child: Checkbox(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
-                    side: MaterialStateBorderSide.resolveWith(
-                        (states) => BorderSide(color: checkBoxBorderColor, width: 1)),
+                    side: MaterialStateBorderSide.resolveWith((states) =>
+                        BorderSide(color: checkBoxBorderColor, width: 1)),
                     checkColor: Colors.white,
                     value: checkBoxValue,
                     activeColor: Colors.green,
                     onChanged: (newValue) {
-                      checkBoxValue = newValue!;
+                      onChangedCheckBox!(newValue);
                     }),
               ),
-              Stack(
-                  children: [
+              Stack(children: [
                 Container(
                   alignment: Alignment.topLeft,
                   height: 110,
                   width: 320,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 242, 206, 239),//Color.fromARGB(255, 238, 191, 228)
+                    color: Color.fromARGB(198, 189, 160, 255),//Color.fromARGB(255, 242, 206, 239),//Color.fromARGB(255, 238, 191, 228)
+                    //Color.fromARGB(255, 238, 191, 228)
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
@@ -754,7 +777,6 @@ Widget taskCard({
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-
                         Expanded(
                           flex: 1,
                           child: Container(
@@ -762,8 +784,8 @@ Widget taskCard({
                             width: 35,
                             child: FloatingActionButton(
                               elevation: 0,
-                              backgroundColor: Color.fromARGB(
-                                  114, 135, 135, 135),
+                              backgroundColor:
+                                  Color.fromARGB(114, 135, 135, 135),
                               onPressed: () {
                                 editOnPressed!();
                               },
@@ -782,8 +804,8 @@ Widget taskCard({
                             width: 35,
                             child: FloatingActionButton(
                               elevation: 0,
-                              backgroundColor: Color.fromARGB(
-                                  114, 135, 135, 135),
+                              backgroundColor:
+                                  Color.fromARGB(114, 135, 135, 135),
                               onPressed: () {
                                 deleteOnPressed!();
                               },
@@ -809,7 +831,7 @@ Widget taskCard({
                       height: 50,
                       width: 320,
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 238, 191, 228),
+                        color: lavender ,//Color.fromARGB(255, 238, 191, 228),
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(10)),
@@ -856,7 +878,117 @@ Widget taskCard({
                     ),
                   ]),
                 ),
-              ]
+              ]),
+            ],
+          ),
+        ),
+      ),
+    );
+
+Widget notesCard({
+  required index,
+  String? title,
+  String? note,
+  Function? onTap,
+}) =>
+    GestureDetector(
+      onTap: () {
+        onTap!();
+      },
+      child: Container(
+// height: height[index],
+        decoration: BoxDecoration(
+          color: Colors.white38,
+          borderRadius: index.isEven
+              ? BorderRadius.only(
+                  topRight: Radius.circular(25),
+                  topLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(25))
+              : BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                  bottomLeft: Radius.circular(25)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 8.0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 2,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Container(
+                        height: 2,
+                        width: 25,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 120.0),
+                child: IconButton(
+                  onPressed: () {
+                    // setState(() {
+                    // if(important==true)important=false;
+                    // else important=true;
+                    // });
+                  },
+                  icon: Icon(
+                    Icons.star_rounded,
+                    size: 30,
+                  ),
+                  // icon: important
+// ?
+// Icon
+// (
+// Icons.star_rounded,size: 30
+// ,
+// )
+// :
+// Icon
+// (
+// Icons.star_border_rounded,size: 30
+// ,
+// )
+// )
+// ,           )
+                ),
+              ),
+
+              Text(
+                title!,
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+              ),
+              Text(note!, style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black54,
+                ),
+                maxLines: 6,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
@@ -864,17 +996,13 @@ Widget taskCard({
       ),
     );
 
-
-
-Widget buildFloatingSearchBar(context,FloatingSearchBarController controller) {
-  final isPortrait =
-      MediaQuery.of(context).orientation == Orientation.portrait;
+Widget buildFloatingSearchBar(context, FloatingSearchBarController controller) {
+  final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
   return Container(
     height: 500,
     child: FloatingSearchBar(
-
-      controller:controller ,
+      controller: controller,
       borderRadius: BorderRadius.all(Radius.circular(10)),
       elevation: 0,
       backgroundColor: Color.fromARGB(255, 119, 119, 119),
@@ -899,7 +1027,10 @@ Widget buildFloatingSearchBar(context,FloatingSearchBarController controller) {
         FloatingSearchBarAction(
           showIfOpened: false,
           child: CircularButton(
-            icon: const Icon(Icons.search_rounded,color: Colors.white,),
+            icon: const Icon(
+              Icons.search_rounded,
+              //color: Colors.white,
+            ),
             onPressed: () {},
           ),
         ),

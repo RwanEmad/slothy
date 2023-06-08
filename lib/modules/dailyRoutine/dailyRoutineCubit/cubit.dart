@@ -16,7 +16,7 @@ class dailyRoutineCubit extends Cubit<dailyRoutineStates>{
 
   final FloatingSearchBarController controller = FloatingSearchBarController();
   bool floatingLable = true;
-
+  bool checkBoxValue = false;
   double? height;
   double? width;
 
@@ -38,7 +38,10 @@ class dailyRoutineCubit extends Cubit<dailyRoutineStates>{
 
     emit(ReOrderPeriority());
   }
-
+  checkBox(newValue){
+    checkBoxValue=newValue;
+    emit(CheckBox());
+  }
   void mediaQuery(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     height = size.height; //392.72727272727275
